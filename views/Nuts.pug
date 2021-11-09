@@ -1,0 +1,15 @@
+extends layout
+
+block content
+ div(class="container-fluid")
+  h1= title
+  -var nutDesc=[{nutName :"Almond",Price:17.65,Quantity:2},{nutName:"Pistachio",Price:19.20,Quantity:10},{nutName:"Hazelnut",Price:18.90,Quantity:12}] 
+  div(class="row")
+    each nut,index in nutDesc
+        div(class = "col-sm-2", onclick=`buy(${index})`) #{nut.nutName} - #{nut.Price} - #{nut.Quantity}
+  
+  script.       
+      function buy(itemNo)
+      {
+        alert(`You purchased Item ${itemNo+1}`)
+      }
