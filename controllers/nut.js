@@ -41,10 +41,18 @@ exports.nut_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-// Handle nut delete form on DELETE.
-exports.nut_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: nut delete DELETE ' + req.params.id);
-};
+// Handle nut delete on DELETE.
+exports.nut_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Nut.findByIdAndDelete(req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
 // Handle nut update form on PUT.
 exports.nut_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body
@@ -77,4 +85,32 @@ catch(err){
 res.status(500);
 res.send(`{"error": ${err}}`);
 }
+};
+
+// Handle a show one view with id specified by query
+exports.nut_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Nut.findById( req.query.id)
+    res.render('nutdetail',
+    { title: 'nut Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+
+// Handle building the view for creating a nut.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.nut_create_Page = function (req, res) {
+    console.log("create view")
+    try {
+        res.render('nutcreate', { title: 'Nut Create' });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
 };

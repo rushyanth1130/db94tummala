@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1= title
+    - let nutid = toShow._id
+    - let nutName = toShow.nutName
+    - let Price = toShow.Price
+    - let Quantity = toShow.Quantity
+    div
+    div.row
+    div(class='nutAttr mr-3') Nut ID is:
+    div #{nutid}
+    div.row
+    div(class='nutAttr mr-3') Nut Name is:
+    div #{nutName}
+    div.row
+    div(class='nutAttr mr-3') Nut Cost is:
+    div #{Price}
+    div.row
+    div(class='nutAttr mr-3') Nut Quantity is:
+    div #{Quantity}

@@ -10,7 +10,7 @@ router.get('/', api_controller.api);
 // POST request for creating a nut.
 router.post('/nuts', nut_controller.nut_create_post);
 // DELETE request to delete nut.
-router.delete('/nut/:id', nut_controller.nut_delete);
+router.delete('/nuts/:id', nut_controller.nut_delete);
 // PUT request to update nut.
 router.put('/nuts/:id',nut_controller.nut_update_put);
 // GET request for one nut.

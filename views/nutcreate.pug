@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+
+  form(id='NutForm', action="/resource/nuts", method="POST")
+    div.form-group
+        label.nutAttr(for='nutName') Nut Name
+        input#nutName(type='text', name='nutName')
+    div.form-group
+        label.nutAttr(for='Price') Nut Cost
+        input#Price(type='number', name='Price')
+    div.form-group
+        label.nutAttr(for='Quantity') Nut Quantity
+        input#Quantity(type='number', name='Quantity')
+    input.button(type="submit")
+
+  script.
+    document.forms['NutForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+           alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        //- document.getElementById("errors").style.display="block"
+        //- document.getElementById("errors").innerHTML="hello";
+        alert("Save failed " + error)
+      });
+    });
