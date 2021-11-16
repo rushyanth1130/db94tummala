@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title
+
+  - let nutid = toShow._id
+  - let nutName = toShow.nutName
+  - let nutPrice = toShow.Price
+  - let nutQuantity = toShow.Quantity
+  
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{nutid}
+  - let actionid = "/resource/nuts/" + nutid
+  form(id='NutForm', action= actionid, method="GET")
+    div.form-group
+        label.nutAttr(for='nutName') Nut Name
+        input#nutName(type='text', name='nutName', value= Name )
+    div.form-group
+        label.nutAttr(for='Price') Nut Price
+        input#Price(type='number', name='Price', value= Price )
+    div.form-group
+        label.nutAttr(for='Quantity') Nut Quantity
+        input#Quantity(type='number', name='Quantity', value= Quantity )
+    input(type="submit")
+
+  script.
+    document.forms['NutForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        //resp = "sample";
+        console.log("sample")
+        alert("Update failed " + error )
+      });
+    });

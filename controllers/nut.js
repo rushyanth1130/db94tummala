@@ -60,8 +60,8 @@ exports.nut_update_put = async function(req, res) {
     try {
     let toUpdate = await Nut.findById( req.params.id)
     // Do updates of properties
-    if(req.body.nut_type)
-    toUpdate.nut_type = req.body.nut_type;
+    if(req.body.nutName)
+    toUpdate.nutName = req.body.nutName;
     if(req.body.Price) toUpdate.Price = req.body.Price;
     if(req.body.Quantity) toUpdate.Quantity = req.body.Quantity;
     let result = await toUpdate.save();
@@ -114,3 +114,31 @@ exports.nut_create_Page = function (req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// Handle building the view for updating a nut.
+// query provides the id
+exports.nut_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Nut.findById(req.query.id)
+    res.render('nutupdate', { title: 'Nut Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+
+    // Handle a delete one view with id from query
+exports.nut_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Nut.findById(req.query.id)
+    res.render('nutdelete', { title: 'Nut Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
