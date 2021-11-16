@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 // Require controller modules.
 var api_controller = require('../controllers/api');
 var nut_controller = require('../controllers/nut');
@@ -21,6 +23,13 @@ router.get('/nuts/:id', nut_controller.nut_detail);
 router.get('/nuts', nut_controller.nut_list);
 
 
+const secured = (req, res, next) => {
+    if (req.user) {
+        return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/login");
+}
 
 
 module.exports = router;

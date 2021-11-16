@@ -1,19 +1,19 @@
 extends layout
 
 block content
-  h1= title
-
+  u.h1(class="hh1")= title
+  <hr>
   form(id='NutForm', action="/resource/nuts", method="POST")
     div.form-group
         label.nutAttr(for='nutName') Nut Name
-        input#nutName(type='text', name='nutName')
+        input#nutName(type='text', name='nutName', class='form-control')
     div.form-group
         label.nutAttr(for='Price') Nut Cost
-        input#Price(type='number', name='Price')
+        input#Price(type='number', name='Price', class='form-control')
     div.form-group
         label.nutAttr(for='Quantity') Nut Quantity
-        input#Quantity(type='number', name='Quantity')
-    input.button(type="submit")
+        input#Quantity(type='number', name='Quantity', class='form-control')
+    input.button(type="submit", class="btn btn-primary")
 
   script.
     document.forms['NutForm'].addEventListener('submit', (event) => {

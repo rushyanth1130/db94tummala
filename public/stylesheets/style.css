@@ -8,6 +8,12 @@ a {
 }
 
 .nutAttr {
-  background-color: aquamarine;
+  color: rgb(255, 127, 144);
   width: 120px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: bold;
   }
+
+.hh1 {
+  color: cornflowerblue;
+}
