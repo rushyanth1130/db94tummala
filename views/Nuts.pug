@@ -4,14 +4,19 @@ block content
  div(class="container-fluid")
   h1= title
   -let nutDesc=thenuts
-  console.log(nutDesc)
-
-  div(class="row")
-    each nut,index in nutDesc
-        div(class = "col-sm-2", onclick=`buy(${index})`) #{nut.nutName} - #{nut.Price} - #{nut.Quantity}
   
-  script.       
-      function buy(itemNo)
+  div(class="row m-1")
+    each nut,index in nutDesc
+      -let destination = `dispatch(\"/nuts/update?id=${nut._id}\")`
+      div(class = "col-sm-2", onclick=`buy(${index})`) #{nut.nutName} - #{nut.Price} - #{nut.Quantity}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+  
+  script.
+    function dispatch(path)
+      {
+        window.location.href=path
+      }
+    function buy(itemNo)
       {
         alert(`You purchased Item ${itemNo+1}`)
       }
