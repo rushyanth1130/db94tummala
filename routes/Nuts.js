@@ -14,12 +14,13 @@ const secured = (req, res, next) => {
 router.get('/' , nut_controlers.nut_view_all_Page );
 
 /* GET detail nut page */
-router.get('/detail', secured, nut_controlers.nut_view_one_Page);
+router.get('/detail',secured, nut_controlers.nut_view_one_Page);
 
 /* GET create nut page */
 router.get('/create',secured, nut_controlers.nut_create_Page);
+
 /* GET create update page */
-router.get('/update',  nut_controlers.nut_update_Page);
+router.get('/update', secured,  nut_controlers.nut_update_Page);
 
 /* GET create nut page */
 router.get('/delete', secured,  nut_controlers.nut_delete_Page);
